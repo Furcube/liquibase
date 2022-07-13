@@ -208,7 +208,7 @@ public class SequenceSnapshotGenerator extends JdbcSnapshotGenerator {
                     "CASE WHEN order_flag = 'N' THEN NULL ELSE order_flag END AS is_ordered, \n" +
                     "LAST_NUMBER as START_VALUE, \n" +
                     "CASE WHEN cache_size = 20 THEN NULL ELSE cache_size END AS cache_size \n" +
-                    "FROM ALL_SEQUENCES WHERE SEQUENCE_OWNER = '" + schema.getCatalogName() + "'";
+                    "FROM ALL_SEQUENCES" + (schema.getCatalogName() == null ?  "" : "WHERE SEQUENCE_OWNER = '" + schema.getCatalogName() + "'");
         } else if (database instanceof PostgresDatabase) {
             int version = 9;
             try {
